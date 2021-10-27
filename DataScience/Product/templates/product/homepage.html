@@ -1,0 +1,82 @@
+{% extends "product/inbox.html" %}
+
+
+{% block inbox %}
+<div class="container-fluid p-0 ">
+    <div class="row">
+        <div class="sidebar">
+           
+        </div>
+        <div class="middlebar p-0 ">
+            <div class="row padder">
+                <div class="col-12">
+                    <div class="category-block">
+                        <i class='fas fa-book-open'></i>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-between">
+                   
+                    <input id="search_bar" class="search_text" placeholder="Search Category, Tags, Product or more..." type="text">
+                    <button class="search_btn" onclick="getResult()">Search</button>
+
+
+                </div>
+                <div class="col-12">
+                    <div class="mt-4">
+
+                        <div class="length_display">
+                           Showing {{data|length}} Results on Page 1
+                        </div>
+
+                    </div>
+                    
+                    <div class="mt-2">
+                        {% for item in data %}
+                            <div class="card border-0 border-bottom pb-4 mt-4 d-flex justify-content-start flex-row">
+                                <div style="min-width: 20%;"  class="d-flex justify-content-center">
+                                    <img src="{{item.Image}}" class="imgblock" style="max-width:200px"/>
+                                </div>
+                                <div style="margin-left: 20px;">
+                                    <div>
+                                        <div class="d-flex flex-row">
+                                            <div class="pilling bg-warning">
+                                                {{item.Vendor}}
+                                            </div>
+                                        </div>
+                                        <div  class="mt-2">
+                                            <h5>
+                                                {{item.Title}}
+                                            </h5>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div style="font-size: 20px; font-weight: 500;">
+                                                &#8377; {{item.Price}} <span  style="margin-left:8px;font-size: 14px; color: rgb(0,0,0,0.4); font-weight: 500; text-decoration: line-through;"> 
+                                                    &#8377; {{item.Actual_Price}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rightbar">
+            
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function getResult(){
+            var search = document.getElementById("search_bar").value;
+            window.location.href = "/products/?k="+search;
+        }
+    </script>
+{% endblock %}
+
